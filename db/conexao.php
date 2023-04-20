@@ -1,6 +1,6 @@
 <?php
 
-$dbEnv = parse_ini_file(".env");
+$dbEnv = parse_ini_file(".git/.env");
 
 $host = $dbEnv["HOST"];
 $username = $dbEnv["USERNAME"];
