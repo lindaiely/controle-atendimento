@@ -1,6 +1,6 @@
 <?php
 
-$dbEnv = parse_ini_file(".git/.env");
+$dbEnv = parse_ini_file($_SERVER["DOCUMENT_ROOT"] . "/sistema-medico/.git/.env");
 
 $host = $dbEnv["HOST"];
 $username = $dbEnv["USERNAME"];
