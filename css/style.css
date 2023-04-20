@@ -84,3 +84,46 @@ body, html{
     padding-top: 1rem;
     font-size: 1.2rem;
 }
+form{
+    margin: 1rem 0;
+}
+form > div{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+form > div > label{
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+form > div > input{
+    width: 100%;
+    border: 1px solid #8a91b9;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+}
+.btn{
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-save{
+    background-color: #2C3359;
+    color: #F2EDE4;
+}
+.my-table{
+    width: 100%;
+    border: 1px solid #2C3359;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+.my-table tr, .my-table th, .my-table td{
+    border: 1px solid #2C3359;
+    padding: 0.7rem;
+}
+.my-table thead tr:first-child{
+    background-color: #8a91b9;
+}
