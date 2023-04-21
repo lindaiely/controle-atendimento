@@ -6,8 +6,8 @@
 
     <form action="especialidade-save.php" method="post">
         <div>
-            <label for="">Especialidade:</label>
-            <input type="text" name="especialidade" id="especialidade">
+            <label class="form-label">Especialidade:</label>
+            <input type="text" name="especialidade" id="especialidade" class="form-control">
         </div>
         <input type="submit" value="Salvar" class="btn btn-save">
     </form>

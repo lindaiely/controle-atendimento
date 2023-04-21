@@ -87,17 +87,17 @@ body, html{
 form{
     margin: 1rem 0;
 }
-form > div{
+form div{
     width: 100%;
     margin-bottom: 1rem;
 }
-form > div > label{
+form div > label .form-label{
     display: block;
     width: 100%;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
-form > div > input{
+form .form-control{
     width: 100%;
     border: 1px solid #8a91b9;
     border-radius: 5px;
@@ -105,7 +105,7 @@ form > div > input{
     outline: none;
 }
 .btn{
-    padding: 0.8rem;
+    padding: 0.9rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
