@@ -5,6 +5,7 @@
     <?php require_once "components/message.php"; ?>
 
     <form action="medico-save.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="id">
         <div>
             <label>CRM</label>
             <input type="text" name="crm" id="crm" class="form-control">
@@ -44,6 +45,12 @@
     <script>
         document.getElementById("crm").addEventListener("blur", (event) => {
             let valueCrm = event.target.value
+            let nome = document.getElementById("nome")
+            let id = document.getElementById("id")
+
+            nome.value = "";
+            id.value = "";
+
             if(valueCrm != ''){
 
                 let = formData = new FormData()
@@ -56,7 +63,8 @@
                 .then( result => result.json())
                 .then(result => {
                     if(result.status == "ok"){
-
+                        nome.value = result.medico.nome
+                        id.value = result.medico.id
                     }else{
                         alert(result.message);
                     }
