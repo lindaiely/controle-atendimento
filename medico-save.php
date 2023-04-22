@@ -3,6 +3,7 @@
 $id = $_POST["id"];
 $nome = $_POST["nome"];
 $crm = $_POST["crm"];
+$especialidades = $_POST["especialidades"];
 
 $foto = $_FILES["foto"];
 $valid = true;
@@ -34,6 +35,7 @@ if(!$valid){
 }
 
 require_once "db/conexao.php";
+mysqli_autocommit($conn, false);
 
 $extensao = explode(".", $foto["name"]);
 $numeroPosicao = count($extensao);
@@ -53,17 +55,43 @@ if($id != ""){
         }
         $sql = "UPDATE tbmedico SET nome = '$nome', crm = '$crm', foto = '$fileName' WHERE id = " . $id;
         if($conn->query($sql)){
+
+            // deleta a especialidade ja existente para cadastrar novas
+            $sqlDeleteEspecialidade = "DELETE FROM tbmedicoespecialidade WHERE medico_id = " . $id;
+            $conn->query($sqlDeleteEspecialidade);
+
+            if(count($especialidades) > 0){
+                foreach($especialidades as $value){
+                    $sqlInsertEspecialidade = "INSERT INTO tbmedicoespecialidade VALUES($value, $id)";
+                    $conn->query($sqlInsertEspecialidade);
+                }
+            }
+
+            mysqli_commit($conn);
+
             if($foto["name"] != ""){
                 unlink("fotomedico/" . $medico["foto"]);
                 move_uploaded_file($foto["tmp_name"], "fotomedico/" . $fileName);
             }
-            $msg = "Cadastrado com sucesso!";
+            $msg = "Editado com sucesso!";
         }
     }
 }else{
     // id == "" gravar dados
     $sql = "INSERT INTO tbmedico VALUES(NULL, '$nome', '$crm', '$fileName')";
     if($conn->query($sql)){
+
+        //pego o id que acabou de ser cadastrado e verifico se o usuario marcou mais de uma especialidade e insiro no bd
+        $idmedico = mysqli_insert_id($conn);
+        if(count($especialidades) > 0){
+            foreach($especialidades as $value){
+                $sqlInsertEspecialidade = "INSERT INTO tbmedicoespecialidade VALUES($value, $idmedico)";
+                $conn->query($sqlInsertEspecialidade);
+            }
+        }
+
+        mysqli_commit($conn);
+
         move_uploaded_file($foto["tmp_name"], "fotomedico/" . $fileName);
         $msg = "Cadastro realizado com sucesso!";
     }else{

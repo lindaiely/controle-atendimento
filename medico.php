@@ -29,7 +29,7 @@
                     while($especialidade = mysqli_fetch_assoc($rsEspecialidade)){
                 ?>
                     <div>
-                        <input type="checkbox" name="especialidades" id="especialidade<?=$especialidade["id"]?>"
+                        <input type="checkbox" name="especialidades[]" id="especialidade<?=$especialidade["id"]?>"
                             value="<?=$especialidade["id"]?>">
                             <label for="especialidade<?=$especialidade["id"]?>"><?=$especialidade["especialidade"]?></label>
                     </div>
