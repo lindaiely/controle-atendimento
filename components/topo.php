@@ -20,6 +20,7 @@
                 <a href="paciente.php">PACIENTE</a>
                 <a href="especialidade.php">ESPECIALIDADES</a>
                 <a href="buscar-consulta.php">BUSCAR CONSULTA</a>
+                <a href="buscar-usuario.php">BUSCAR USUÁRIO</a>
             </nav>
         </header>
         <section id="conteudo">

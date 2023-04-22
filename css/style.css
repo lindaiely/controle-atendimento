@@ -146,3 +146,20 @@ form .form-control{
     animation: fadeOut 2s;
     animation-fill-mode: forwards;
 }
+
+.w-33{
+    float: left;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+.clear{
+    clear: both;
+}
+.btn-find{
+    background-color: #2C3359;
+    color: #F2EDE4;
+}
+.imggrid{
+    height: 3rem;
+}
