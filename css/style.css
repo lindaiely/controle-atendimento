@@ -153,6 +153,12 @@ form .form-control{
     box-sizing: border-box;
     padding: 0.5rem;
 }
+.w-50{
+    float: left;
+    width: calc(100% / 2);
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
 .clear{
     clear: both;
 }
