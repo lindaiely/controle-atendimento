@@ -8,7 +8,7 @@
     ?>
 
     <div id="resultError"></div>
-    <form action="marcar-consulta-save.php" method="post">
+    <form action="marcar-consulta-save.php" method="post" id="my-form">
         <input type="hidden" name="idpaciente" value="" id="idpaciente">
         <div>
             <label class="form-label">Informe o CPF do paciente:</label>
@@ -142,8 +142,9 @@
             }
         })
 
-        document.querySelector(".salvar-consulta").addEventListener('click', (event) => {
+        document.querySelector(".salvar-consulta").addEventListener('click', async (event) => {
             document.getElementById("resultError").innerHTML = ""
+            document.getElementById("resultError").classList.remove("error")
 
             let idpaciente = document.getElementById("idpaciente").value
             let especialidade = document.getElementById("especialidade").value
@@ -176,9 +177,37 @@
 
             if(msgErro != ""){
                 document.getElementById("resultError").innerHTML = msgErro
+                document.getElementById("resultError").classList.add("error")
                 event.preventDefault()
                 return;
             }
+
+            let formData = new FormData();
+            formData.append("idpaciente", idpaciente)
+            formData.append("especialidade", especialidade)
+            formData.append("medico", medico)
+            formData.append("dt_consulta", dt_consulta)
+            formData.append("hr_consulta", hr_consulta)
+
+            event.preventDefault() // cancelando o envio do formulario -- nao vai disparar o submit do formulario
+
+            // executa o fetch passando os dados
+            let result = await fetch('marcar-consulta-validar-ajax.php', {
+                method : 'POST',
+                body : formData
+            })
+
+            let dados = await result.json() // recupera o json
+
+            // se o status do json for invalido, imprime o erro
+            if(dados.status == "invalid"){
+                document.getElementById("resultError").innerHTML = dados.message
+                document.getElementById("resultError").classList.add("error")
+            }else{
+                //envia o formulário apenas se o status do json for valido 
+                document.querySelector("#my-form").submit()
+            }
+           
         })
 
     </script>

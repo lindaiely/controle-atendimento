@@ -169,3 +169,12 @@ form .form-control{
 .imggrid{
     height: 3rem;
 }
+
+.error{
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border: 1px solid #720000;
+    background-color: #f82929;
+    border-radius: 5px;
+    color: #F2EDE4;
+}
