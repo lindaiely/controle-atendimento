@@ -43,7 +43,7 @@
             </div>
             <div class="w-50">
                 <label class="form-label">Data da consulta:</label>
-                <input type="text" name="dt_consulta" id="dt_consulta" class="form-control" data-mask="99/99/9999">
+                <input type="text" name="dt_consulta" id="dt_consulta" class="form-control data-form" data-mask="99/99/9999">
             </div>
             <div class="w-50">
                 <label class="form-label">Hora da consulta:</label>
@@ -60,6 +60,7 @@
     <script>
         dayjs.extend(window.dayjs_plugin_customParseFormat)
     </script>
+    <script src="js/validar.js"></script>
     <script>
         function limpar(){
             document.getElementById("idpaciente").value = ""
@@ -119,16 +120,6 @@
                 })
             }else{
                 limpar()
-            }
-        })
-
-        document.getElementById("dt_consulta").addEventListener("blur", (event) => {
-            let valor = event.target.value
-            let dateValid = dayjs(valor, 'DD/MM/YYYY', true).isValid()
-
-            if(!dateValid){
-                event.target.value = ""
-                alert("Preencha uma data válida")
             }
         })
 
