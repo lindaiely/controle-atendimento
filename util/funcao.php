@@ -16,3 +16,11 @@ function getTipo($tipo = ""){
 
     return "";
 }
+
+function convertDate($data, $patternIn = "/", $patternOut = "-"){
+    
+    $dataExplode = explode($patternIn, $data); //transforma a data em um array pela barra --> 20/10/2023 = [20, 10, 2023]
+    $dataExplode = array_reverse($dataExplode); // inverte esse array --> [2023, 10, 20]
+
+    return implode($patternOut, $dataExplode); // transforma o array invertido numa string --> 2023-10-20
+}

@@ -7,7 +7,8 @@
         require_once "db/conexao.php";
     ?>
 
-    <form action="" method="post">
+    <div id="resultError"></div>
+    <form action="marcar-consulta-save.php" method="post">
         <input type="hidden" name="idpaciente" value="" id="idpaciente">
         <div>
             <label class="form-label">Informe o CPF do paciente:</label>
@@ -138,6 +139,45 @@
             if(!dateValid){
                 event.target.value = ""
                 alert("Preencha um horário válido")
+            }
+        })
+
+        document.querySelector(".salvar-consulta").addEventListener('click', (event) => {
+            document.getElementById("resultError").innerHTML = ""
+
+            let idpaciente = document.getElementById("idpaciente").value
+            let especialidade = document.getElementById("especialidade").value
+            let medico = document.getElementById("medico").value
+            let dt_consulta = document.getElementById("dt_consulta").value
+            let hr_consulta = document.getElementById("hr_consulta").value
+
+            console.log(`${idpaciente} ${especialidade} ${medico} ${dt_consulta} ${hr_consulta}`)
+            let msgErro = ""
+
+            if(idpaciente == ""){
+                msgErro += "Informe um paciente.<br>"
+            }
+
+            if(especialidade == ""){
+                msgErro += "Informe uma especialidade.<br>"
+            }
+
+            if(medico == ""){
+                msgErro += "Informe um médico.<br>"
+            }
+
+            if(dt_consulta == ""){
+                msgErro += "Informe uma data.<br>"
+            }
+
+            if(hr_consulta == ""){
+                msgErro += "Informe um horário.<br>"
+            }
+
+            if(msgErro != ""){
+                document.getElementById("resultError").innerHTML = msgErro
+                event.preventDefault()
+                return;
             }
         })
 
