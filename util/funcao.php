@@ -24,3 +24,22 @@ function convertDate($data, $patternIn = "/", $patternOut = "-"){
 
     return implode($patternOut, $dataExplode); // transforma o array invertido numa string --> 2023-10-20
 }
+
+//retorna apenas valores numericos, ignorando . e -
+function onlyNumber($valor){
+    return preg_replace("/[^0-9]/", "", $valor);
+}
+
+function getStatus($status){
+    switch($status){
+        case 'ATV':
+            return "Ativo";
+        
+        case 'FIN':
+            return "Finalizado";
+
+        case 'CAN':
+            return "Cancelado";
+        default : return "N/D";
+    }
+}
