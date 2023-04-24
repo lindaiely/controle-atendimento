@@ -6,6 +6,7 @@ require_once "util/funcao.php";
 $cpf = $_POST["cpf"];
 $medico = $_POST["medico"];
 $data = $_POST["data"];
+$status = $_POST["status"];
 
 $cpf = onlyNumber($cpf);
 
@@ -38,8 +39,13 @@ if($cpf != ""){
     FIN -- finalizado
 */
 
-$sqlConsulta .= " AND c.status IN ('ATV', 'FIN')
-                ORDER BY hr_consulta";
+if($status != ""){
+    $sqlConsulta .= " AND c.status = '".$status."' ";
+}else{
+    $sqlConsulta .= " AND c.status IN ('ATV', 'FIN') ";
+}
+
+$sqlConsulta .= " ORDER BY hr_consulta";
 
 
 $resultSetConsulta = $conn->query($sqlConsulta);

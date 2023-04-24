@@ -91,7 +91,7 @@ form div{
     width: 100%;
     margin-bottom: 1rem;
 }
-form div > label .form-label{
+.form-label{
     display: block;
     width: 100%;
     font-weight: bold;
@@ -113,6 +113,14 @@ form .form-control{
 .btn-save{
     background-color: #2C3359;
     color: #F2EDE4;
+}
+.btn-danger{
+    background-color: #f82929;
+    color: #F2EDE4;
+}
+.btn-link{
+    text-decoration: none;
+    padding: 0.5rem;
 }
 .my-table{
     width: 100%;
@@ -147,6 +155,12 @@ form .form-control{
     animation-fill-mode: forwards;
 }
 
+.w-25{
+    float: left;
+    width: calc(100% / 4);
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
 .w-33{
     float: left;
     width: calc(100% / 3);

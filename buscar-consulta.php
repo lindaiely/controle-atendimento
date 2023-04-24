@@ -5,12 +5,14 @@
 
     <h1>Sistema Médico de Consultas - Buscar Consulta</h1>
 
+    <?php require_once "components/message.php"; ?>
+
     <form action="" method="post">
-        <div class="w-33">
+        <div class="w-25">
             <label for="data" class="form-label">Data</label>
             <input type="text" class="form-control data-form" name="data" id="data" data-mask="99/99/9999">
         </div>
-        <div class="w-33">
+        <div class="w-25">
             <label for="medico" class="form-label">Médico</label>
             <select name="medico" id="medico" class="form-control">
                 <option value=""></option>
@@ -25,9 +27,18 @@
                 ?>
             </select>
         </div>
-        <div class="w-33">
+        <div class="w-25">
             <label for="paciente" class="form-label">CPF do paciente</label>
             <input type="text" class="form-control" name="cpf" id="cpf" data-mask="999.999.999-99">
+        </div>
+        <div class="w-25">
+            <label for="status" class="form-label">STATUS</label>
+            <select name="status" id="status" class="form-control">
+                <option value=""></option>
+                <option value="ATV">Ativos</option>
+                <option value="FIN">Finalizados</option>
+                <option value="CAN">Cancelados</option>
+            </select>
         </div>
         <div class="clear"></div>
         <input type="submit" value="Consultar" class="btn btn-save" id="btnfind">
@@ -42,6 +53,7 @@
                     <th>ESPECIALIDADE</th>
                     <th>DATA / HORA</th>
                     <th>STATUS</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -67,11 +79,13 @@
             let cpf = document.getElementById("cpf").value
             let medico = document.getElementById("medico").value
             let data = document.getElementById("data").value
+            let status = document.getElementById("status").value
 
             let formData = new FormData()
             formData.append("cpf", cpf)
             formData.append("medico", medico)
             formData.append("data", data)
+            formData.append("status", status)
 
             fetch(`buscar-consulta-ajax.php`, {
                 method: 'POST',
@@ -83,14 +97,19 @@
                     if(result.dados.length > 0){
                         document.querySelector("#resultado").style.display = 'block'
                         result.dados.forEach((value, index) => {
-                            document.querySelector("#myTable tbody").innerHTML += 
-                            `<tr>
+                            linha = `<tr>
                                 <td>${value.nomepaciente}</td>
                                 <td>${value.nomemedico}</td>
                                 <td>${value.especialidade}</td>
                                 <td>${value.dt_consulta} ${value.hr_consulta}</td>
                                 <td>${value.status}</td>
-                            </tr>`
+                                <td>`
+                                if(value.status == 'Ativo'){
+                                    linha += `<a href='realizar-consulta.php?id=${value.idconsulta}' class='btn btn-save btn-link'><i class="fa-solid fa-calendar-days"></i></a>
+                                    <a href='cancelar-consulta.php?id=${value.idconsulta}' class='btn btn-danger btn-link'><i class="fa-solid fa-trash-can"></i></a>`
+                                }
+                            linha += `</td>  </tr>`
+                            document.querySelector("#myTable tbody").innerHTML += linha
                         })
                     }
                 }
